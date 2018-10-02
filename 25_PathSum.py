@@ -18,6 +18,44 @@ class Solution:
             return root.val == sum
         return self.hasPathSum(root.left, sum - root.val) or self.hasPathSum(root.right, sum - root.val)
     
+# 非递归 DFS
+class Solution(object):
+    def hasPathSum(self, root, sum):
+        """
+        :type root: TreeNode
+        :type sum: int
+        :rtype: bool
+        """
+        stack = [(root, sum)]
+        while len(stack) > 0:
+            node, tmp_sum = stack.pop()
+            if node:
+                if not node.left and not node.right and node.val == tmp_sum:
+                    return True
+                stack.append((node.right, tmp_sum-node.val))
+                stack.append((node.left, tmp_sum-node.val))
+        return False
+
+
+# 非递归 BFS    
+class Solution(object):
+    def hasPathSum(self, root, sum):
+        """
+        :type root: TreeNode
+        :type sum: int
+        :rtype: bool
+        """
+        queue = [(root, sum)]
+        while len(queue) > 0:
+            node, tmp_sum = queue.pop()
+            if node:
+                if not node.left and not node.right and node.val == tmp_sum:
+                    return True
+                queue.insert(0, (node.right, tmp_sum-node.val))
+                queue.insert(0, (node.left, tmp_sum-node.val))
+        return False
+
+    
     
 # Definition for a binary tree node.
 # class TreeNode:
