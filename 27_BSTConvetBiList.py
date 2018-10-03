@@ -1,3 +1,27 @@
+class Solution:
+    def Convert(self, pRootOfTree):
+        self.linkedlistLast = None
+        self.convertNode(pRootOfTree)
+        pHead = self.linkedlistLast
+        while pHead and pHead.left:
+            pHead = pHead.left
+        return pHead
+
+    def convertNode(self, root):
+        if not root: return
+        pcurr = root
+        if pcurr.left:
+            self.convertNode(pcurr.left)
+        pcurr.left = self.linkedlistLast
+        if self.linkedlistLast:
+            self.linkedlistLast.right = pcurr
+        self.linkedlistLast = pcurr
+        if pcurr.right:
+            self.convertNode(pcurr.right)
+
+
+
+
 
 class BinaryTreeNode():
     def __init__(self, value, left = None, right = None):
