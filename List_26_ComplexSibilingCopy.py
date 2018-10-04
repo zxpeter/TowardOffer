@@ -1,35 +1,26 @@
-class Solution:
-    # 返回 RandomListNode
-    def Clone(self, pHead):
-        self.cloneNodes(pHead)
-        self.connectSiblingNodes(pHead)
-        return self.reconnectNodes(pHead)
-
-    def cloneNodes(self, pHead):
-        pNode = pHead
-        while pNode:
-            pCloned = RandomListNode(pNode.label)
-            pCloned.next = pNode.next
-            pNode.next = pCloned
-            pNode = pCloned.next
-
-    def connectSiblingNodes(self, pHead):
-        pNode = pHead
-        while pNode:
-            pclone = pNode.next
-            if pNode.random:
-                pclone.random = pNode.random.next
-            pNode = pclone.next
-
-    def reconnectNodes(self, pHead):
-        pNode = pHead
-        pCloneHead = None
-        pCloneNode = None
-        if pNode:
-            pCloneHead = pCloneNode = pNode.next
-            pNode.next = pCloneNode.next
-            pNode = pNode.next
-        while pNode:
-            pCloneNode.next, pCloneNode = pNode.next, pCloneNode.next
-            pNode.next, pNode = pCloneNode.next, pNode.next
-        return pCloneHead
+def copyRandomList(self, head):
+    if not head:
+        return None
+    p = head
+    while p:
+        node = RandomListNode(p.label)
+        node.next = p.next
+        p.next = node
+        p = p.next.next
+        # p = node.next
+    p = head    
+    while p:
+        if p.random:
+            p.next.random = p.random.next
+        p = p.next.next
+    newhead = head.next
+    pold = head
+    pnew = newhead
+    while pnew.next:
+        pold.next = pnew.next
+        pold = pold.next
+        pnew.next = pold.next
+        pnew = pnew.next
+    pold.next = None
+    pnew.next = None
+    return newhead
