@@ -53,7 +53,28 @@ class LinkList():
             if p == q:
                 return True
         return False
-
+    
+    def detectCycle(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        if not head:
+            return None
+        if head == head.next:
+            return head
+        p = head
+        q = head
+        while q.next and q.next.next:
+            p = p.next
+            q = q.next.next
+            if p == q:
+                q = head
+                while p != q:
+                    p = p.next
+                    q = q.next
+                return p
+        return None
 
 if __name__ == '__main__':
     lis = LinkList()
