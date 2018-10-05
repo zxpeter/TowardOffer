@@ -1,6 +1,27 @@
+# longestPalindromeSubseq 子序列
+class Solution(object):
+    def longestPalindromeSubseq(self, s):
+        if s == s[::-1]:
+            return len(s)
+
+        n = len(s)
+        dp = [[0 for j in xrange(n)] for i in xrange(n)]
+
+        for i in xrange(n-1, -1, -1):
+            dp[i][i] = 1
+            for j in xrange(i+1, n):
+                if s[i] == s[j]:
+                    dp[i][j] = 2 + dp[i+1][j-1]
+                else:
+                    dp[i][j] = max(dp[i+1][j], dp[i][j-1])
+                    
+        return dp[0][n-1]
+
+# longestPalindromeSubstring 子串
 # o(n^2)的解法，原本需要o(n^3)，先生成每个子串，然后比较
 class Solution(object):
-    def longestPalindrome(self, s):
+    def longestPalindrome
+    (self, s):
         """
         :type s: str
         :rtype: str
