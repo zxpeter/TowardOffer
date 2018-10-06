@@ -2,10 +2,6 @@
 
 class Solution(object):
     def lengthOfLIS(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: int
-        """
         if not nums: return 0
         dp = [1] * len(nums)
         
@@ -36,15 +32,10 @@ class Solution(object):
                         count[i] += count[j]
                 
         return sum([count[i] for i in range(len(nums)) if dp[i] == max(dp)])
-        
-674. Longest Continuous Increasing Subsequence
-             
+
+674. Longest Continuous Increasing Subsequence   
 class Solution(object):
     def findLengthOfLCIS(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: int
-        """
         # Time: O(n)
         # Space: O(1)
         max_len = i = 0
@@ -54,5 +45,18 @@ class Solution(object):
                 curr, i = curr + 1, i + 1
             max_len = max(max_len, curr)
             i += 1
-        return max_len        
-        
+        return max_len  
+    
+392. Is Subsequence    
+class Solution(object):
+    def isSubsequence(self, s, t):
+        if len(s) == 0:
+            return True
+        if len(t) == 0:
+            return False 
+        i, j = 0, 0
+        while i < len(s) and j < len(t):
+            if s[i] == t[j]:
+                i += 1
+            j += 1
+        return True if i == len(s) else False  
