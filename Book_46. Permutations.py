@@ -17,3 +17,15 @@ class Solution(object):
             self.dfs(result, nums[:i]+nums[i+1:], ways+[nums[i]])
             
             
+179. Largest Number     
+Given a list of non negative integers, arrange them such that they form the largest number.
+Input: [10,2]
+Output: "210"           
+    
+class Solution:
+    def largestNumber(self, nums): # python 2.7 have cmp, which no longer in py3
+        str_num = map(str, nums)
+        str_num.sort(cmp=lambda x,y: cmp(x+y, y+x),reverse = True)
+        return str(int(''.join(str_num)))  # 解决了‘00’ -> ‘0’ 的问题
+        
+        
