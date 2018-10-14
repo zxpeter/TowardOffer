@@ -30,8 +30,8 @@ class Solution:
             for j in range(len(s)):
                 if p[i] == '*': 
                     if p[i - 1] == s[j] or p[i - 1] == '.':
-                        dp[i + 1][j + 1] = dp[i - 1][j + 1] or dp[i][j + 1]
-                        dp[i + 1][j + 1] |= dp[i + 1][j]
+                        dp[i + 1][j + 1] = dp[i - 1][j + 1] or dp[i][j + 1]  # 匹配0次一次
+                        dp[i + 1][j + 1] |= dp[i + 1][j]  # 匹配多次
                     else:
                         dp[i + 1][j + 1] = dp[i - 1][j + 1]
                 else:
