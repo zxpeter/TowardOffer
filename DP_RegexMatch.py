@@ -1,4 +1,6 @@
 # 10. Regular Expression Matching
+'.' Matches any single character.
+'*' Matches zero or more of the preceding element.
 
 def isMatch(self, s, p):
     dp = [[False] * (len(s) + 1) for _ in range(len(p) + 1)]
@@ -16,6 +18,9 @@ def isMatch(self, s, p):
     return dp[-1][-1]
     
 44. Wildcard Matching
+'?' Matches any single character.
+'*' Matches any sequence of characters (including the empty sequence).
+
 dp[n] means the substring s[:n] if match the pattern i
 dp[0] means the empty string '' or s[:0] which only match the pattern '*'
 use the reversed builtin because for every dp[n+1] we use the previous 'dp'
