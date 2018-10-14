@@ -1,21 +1,44 @@
 # 10. Regular Expression Matching
 '.' Matches any single character.
 '*' Matches zero or more of the preceding element.
+class Solution:
+    def isMatch2(self, s, p):
 
-def isMatch(self, s, p):
-    dp = [[False] * (len(s) + 1) for _ in range(len(p) + 1)]
-    dp[0][0] = True
-    for i in range(1, len(p)):
-        dp[i + 1][0] = dp[i - 1][0] and p[i] == '*'
-    for i in range(len(p)):
-        for j in range(len(s)):
-            if p[i] == '*':
-                dp[i + 1][j + 1] = dp[i - 1][j + 1] or dp[i][j + 1]
-                if p[i - 1] == s[j] or p[i - 1] == '.':
-                    dp[i + 1][j + 1] |= dp[i + 1][j]
-            else:
-                dp[i + 1][j + 1] = dp[i][j] and (p[i] == s[j] or p[i] == '.')
-    return dp[-1][-1]
+        if p == '':
+            return s == ''
+        if len(p) == 1:
+            return len(s) == 1 and (s[0] == p[0] or p[0] == '.')
+        if p[1] != '*':
+            if s == '':
+                return False
+            return (s[0] == p[0] or p[0] == '.') and self.isMatch(s[1:], p[1:])
+        
+        while s and (s[0] == p[0] or p[0] == '.'):
+            if self.isMatch(s, p[2:]):
+                return True
+            s = s[1:]
+        
+        return self.isMatch(s, p[2:])        # 假如第一个字符和匹配规则不匹配，则去判断之后的是否匹配
+
+    def isMatch(self, s, p):
+
+        dp = [[False] * (len(s) + 1) for _ in range(len(p) + 1)]
+        dp[0][0] = True
+        for i in range(1, len(p)):
+            dp[i + 1][0] = dp[i - 1][0] and p[i] == '*'
+        for i in range(len(p)):
+            for j in range(len(s)):
+                if p[i] == '*': 
+                    if p[i - 1] == s[j] or p[i - 1] == '.':
+                        dp[i + 1][j + 1] = dp[i - 1][j + 1] or dp[i][j + 1]
+                        dp[i + 1][j + 1] |= dp[i + 1][j]
+                    else:
+                        dp[i + 1][j + 1] = dp[i - 1][j + 1]
+                else:
+                    dp[i + 1][j + 1] = dp[i][j] and (p[i] == s[j] or p[i] == '.')
+        return dp[-1][-1]
+
+        
     
 44. Wildcard Matching
 '?' Matches any single character.
