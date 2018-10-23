@@ -65,7 +65,7 @@ class Solution(object):
             # merger
             l, r = 0, 0                         # increase l and r iteratively
             while l < len(left) and r < len(right):
-                if left[l] <= 2*right[r]:
+                if left[l] <= right[r]:
                     l += 1
                 else:
                     self.cnt += len(left)-l     # add here
