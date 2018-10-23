@@ -9,11 +9,12 @@ def BST_post(li):
     for j in range(i, len(li)-1):
         if li[j] < root:
             return False
+    #  判断左右子树是否分别都是BST
     left = True
-    if i > 0:
+    if i > 0:  # 存在左子树
         left = BST_post(li[0:i])
     right = True
-    if i < len(li)-1:
+    if i < len(li)-1:  # 存在右子树
         right = BST_post(li[i:-1])
     return left and right
 
