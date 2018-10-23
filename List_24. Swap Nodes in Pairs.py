@@ -3,6 +3,7 @@
 #     def __init__(self, x):
 #         self.val = x
 #         self.next = None
+Given 1->2->3->4, you should return the list as 2->1->4->3.
 
 class Solution(object):
     def swapPairs(self, head):
