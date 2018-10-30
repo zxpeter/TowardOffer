@@ -64,3 +64,26 @@ class Solution(object):
             if i == n / 2 + 1:
                 x, y, n, i = y, -x, n + 1, 0
         return res
+       
+# 对角线打印matrix
+    if not matrix:
+        return []
+    row = len(matrix)
+    col = len(matrix[0])
+    col2 = col
+    result = []
+    for i in range(row):
+        for j in range(col2 - 1, -1, -1): #j倒序遍历
+            lst = []
+            i1,j1 = i,j #i1,j1用于方便同一对角线元素的添加，否则改变i,j影响开头元素的选择
+            while i1 <= row - 1 and j1 <= col - 1:
+                lst.append(matrix[i1][j1])
+                j1 += 1
+                i1 += 1
+            result.append(lst)
+            if i == 0 and j == 0:#当遍历完(0,0)开头的一条对角线后，让j固定为0
+                col2 = 1
+    return('the result is: %s'%result,'end')
+
+
+
